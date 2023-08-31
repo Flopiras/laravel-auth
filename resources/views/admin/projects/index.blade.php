@@ -12,7 +12,7 @@
                     <div class="card-body">
                       <h5 class="card-title">{{ $project->title }}</h5>
                       <p class="card-text">{{ $project->getAbstract() }}</p>
-                      <a href="{{ route('admin.projects.show')}}" class="btn btn-primary">Show this project</a>
+                      <a href="{{ route('admin.projects.show', $project)}}" class="btn btn-primary">Show this project</a>
                     </div>
                   </div>
             </div>
