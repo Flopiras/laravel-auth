@@ -17,9 +17,11 @@
                     <a class="nav-link @if(request()->routeIs('guest.home')) active @endif" href="{{ route('guest.home') }}">{{ __('Home') }}</a>
                 </li>
                 {{-- projects --}}
+                @auth
                 <li class="nav-item">
                     <a class="nav-link @if(request()->routeIs('admin.projects*')) active @endif" href="{{ route('admin.projects.index') }}">Projects</a>
                 </li>
+                @endauth
             </ul>
 
             <!-- Right Side Of Navbar -->
