@@ -35,15 +35,17 @@ class ProjectController extends Controller
     {
         $request->validate(
             [
-                'title' => ['required', 'string', 'max:50', Rule::unique('project')],
+                'title' => 'required|string|max:50|unique:projects',
                 'content' => 'nullable|string',
-                'image' => 'nullable|string',
+                'image' => 'nullable|url',
                 'url' => 'nullable|url',
             ],
             [
                 'title.required' => 'Il titolo è obbligatorio',
+                'title.unique' => 'Questo titolo esiste già',
                 'title.max:50' => 'Il titolo non può essere più lungo di 50 caratteri',
-                'url.url' => "L'Url deve essere un link valido"
+                'url.url' => "L'Url deve essere un link valido",
+                'image.url' => "L'Url deve essere un link valido"
             ]
         );
 
@@ -52,7 +54,9 @@ class ProjectController extends Controller
         $project->fill($data);
         $project->slug = Str::slug($project->title, '-');
         $project->save();
-        return to_route('admin.projects.show', $project);
+        return to_route('admin.projects.show', $project)
+            ->with('alert-message', 'Progetto aggiunto con successo')
+            ->with('alert-type', 'success');
     }
 
     /**
