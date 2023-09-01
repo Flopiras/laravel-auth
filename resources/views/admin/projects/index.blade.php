@@ -9,20 +9,35 @@
 </div>
     
 {{-- projects --}}
-    <div class="row row-cols-4 mt-4">
+<div class="mt-4">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nome progetto</th>
+          <th scope="col">Creato il</th>
+          <th scope="col">Ultima modifica</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
         @forelse($projects as $project)
-            <div class="col">
-                <div class="card mb-4" >
-                    <img src="{{ $project->image }}" class="card-img-top" alt="{{ $project->title }}">
-                    <div class="card-body">
-                      <h5 class="card-title">{{ $project->title }}</h5>
-                      <p class="card-text">{{ $project->getAbstract() }}</p>
-                      <a href="{{ route('admin.projects.show', $project)}}" class="btn btn-primary">Vedi progetto</a>
-                    </div>
-                  </div>
-            </div>
-        @empty
-            <h3 class="text-center mt-4">Non ci sono progetti</h3>
-        @endforelse
-    </div>
+        <tr>
+            <th scope="row">{{ $project->id }}</th>
+          <td>{{ $project->title }}</td>
+          <td>{{ $project->created_at }}</td>
+          <td>{{ $project->updated_at }}</td>
+          <td><a href="{{ route('admin.projects.show', $project)}}" class="btn btn-primary">Vedi</a></td>
+        </tr>
+          @empty
+          <tr>
+            <td class="text-center" colspan="5">
+              <h3>Non ci sono progetti disponibili</h3>
+            </td>
+          </tr>
+          @endforelse
+          
+      </tbody>
+    </table>
+  </div>
 @endsection

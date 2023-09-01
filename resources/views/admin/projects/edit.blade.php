@@ -4,7 +4,7 @@
 
 @section('content')
     {{-- back button --}}
-    <a href="{{ route('admin.projects.index') }}" class="btn btn-secondary mt-4">Torna ai progetti</a>
+    <a href="{{ route('admin.projects.index') }}" class="btn btn-secondary mt-4"><i class="fas fa-arrow-left"></i> Torna ai progetti</a>
 
     {{-- form --}}
     @include('includes.form')
