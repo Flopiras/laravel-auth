@@ -25,7 +25,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('admin.projects.create');
+        $project = new Project();
+        return view('admin.projects.create', compact('project'));
     }
 
     /**
@@ -73,7 +74,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**
@@ -81,7 +82,29 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        //
+        $request->validate(
+            [
+                'title' => 'required|string|max:50|unique:projects',
+                'content' => 'nullable|string',
+                'image' => 'nullable|url',
+                'url' => 'nullable|url',
+            ],
+            [
+                'title.required' => 'Il titolo è obbligatorio',
+                'title.unique' => 'Questo titolo esiste già',
+                'title.max:50' => 'Il titolo non può essere più lungo di 50 caratteri',
+                'url.url' => "L'Url deve essere un link valido",
+                'image.url' => "L'Url deve essere un link valido"
+            ]
+        );
+
+        $data = $request->all();
+        $data['slug'] = Str::slug($data['title'], '-');
+        $project->update($data);
+
+        return to_route('admin.projects.show', $project)
+            ->with('alert-message', 'Progetto modificato con successo')
+            ->with('alert-type', 'success');
     }
 
     /**
