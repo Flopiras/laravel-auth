@@ -54,6 +54,7 @@ class ProjectController extends Controller
         $project->fill($data);
         $project->slug = Str::slug($project->title, '-');
         $project->save();
+
         return to_route('admin.projects.show', $project)
             ->with('alert-message', 'Progetto aggiunto con successo')
             ->with('alert-type', 'success');
