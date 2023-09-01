@@ -1,3 +1,5 @@
+
+
 <form method="POST" action="{{ route('admin.projects.store') }}" class="mt-4">
     {{-- token --}}
     @csrf
@@ -8,7 +10,7 @@
         <div class="col-12">
             <div class="mb-3">
                 <label for="title" class="form-label fw-bold">Titolo</label>
-                <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" maxlength="50" placeholder="Inserisci un titolo" value="{{ old('title', '') }}" required>
+                <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="title" maxlength="50" placeholder="Inserisci un titolo" value="{{ old('title', '') }}" required>
 
                 {{-- error message --}}
                 @error('title')
@@ -24,7 +26,7 @@
         <div class="col-12">
             <div class="mb-3">
                 <label for="content" class="form-label fw-bold">Testo del progetto</label>
-                <textarea class="form-control @error('content') is-invalid @enderror" id="content" rows="10">{{ old('content') }}</textarea>
+                <textarea name="content" class="form-control @error('content') is-invalid @enderror" id="content" rows="10">{{ old('content') }}</textarea>
 
                 {{-- error message --}}
                 @error('content')
@@ -39,7 +41,7 @@
         <div class="col-12">
             <div class="mb-3">
                 <label for="link" class="form-label fw-bold">Link al progetto</label>
-                <input type="url" class="form-control @error('link') is-invalid @enderror" id="link" placeholder="Inserisci un link al progetto" value="{{ old('link') }}">
+                <input type="url" name="link" class="form-control @error('link') is-invalid @enderror" id="link" placeholder="Inserisci un link al progetto" value="{{ old('link') }}">
 
                 {{-- error message --}}
                 @error('link')
@@ -54,7 +56,7 @@
         <div class="col-7">
             <div class="mb-3">
                 <label for="image" class="form-label fw-bold">Immagine</label>
-                <input type="url" class="form-control @error('image') is-invalid @enderror" id="image" name="image" placeholder="Url immagine" value="{{ old('image') }}">
+                <input type="url" name="image" class="form-control @error('image') is-invalid @enderror" id="image" name="image" placeholder="Url immagine" value="{{ old('image') }}">
 
                 {{-- error message --}}
                 @error('image')
