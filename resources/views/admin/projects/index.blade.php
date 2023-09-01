@@ -3,7 +3,12 @@
 @section('title', 'Projects')
 
 @section('content')
+{{-- add new --}}
+<div class="mt-4 d-flex justify-content-end">
+    <a href="{{ route('admin.projects.create')}}" class="btn btn-success">Crea nuovo progetto</a>
+</div>
     
+{{-- projects --}}
     <div class="row row-cols-4 mt-4">
         @forelse($projects as $project)
             <div class="col">
@@ -12,7 +17,7 @@
                     <div class="card-body">
                       <h5 class="card-title">{{ $project->title }}</h5>
                       <p class="card-text">{{ $project->getAbstract() }}</p>
-                      <a href="{{ route('admin.projects.show', $project)}}" class="btn btn-primary">Show this project</a>
+                      <a href="{{ route('admin.projects.show', $project)}}" class="btn btn-primary">Vedi progetto</a>
                     </div>
                   </div>
             </div>
