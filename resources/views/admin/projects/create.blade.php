@@ -5,7 +5,7 @@
 @section('content')
     {{-- back button --}}
     <a href="{{ route('admin.projects.index') }}" class="btn btn-secondary mt-4">Torna ai progetti</a>
-    
+
     {{-- form --}}
     <form method="POST" action="{{ route('admin.projects.store') }}" class="mt-4">
         {{-- token --}}
@@ -17,7 +17,7 @@
             <div class="col-12">
                 <div class="mb-3">
                     <label for="title" class="form-label fw-bold">Titolo</label>
-                    <input type="text" class="form-control" id="title" placeholder="Inserisci un titolo">
+                    <input type="text" class="form-control" id="title" maxlength="20" placeholder="Inserisci un titolo" value="{{ old('title') }}" required>
                 </div>
             </div>
             
@@ -25,7 +25,7 @@
             <div class="col-12">
                 <div class="mb-3">
                     <label for="content" class="form-label fw-bold">Testo del progetto</label>
-                    <textarea class="form-control" id="content" rows="10"></textarea>
+                    <textarea class="form-control" id="content" rows="10" value="{{ old('content') }}"></textarea>
                 </div>
             </div>
 
@@ -33,7 +33,7 @@
             <div class="col-12">
                 <div class="mb-3">
                     <label for="url" class="form-label fw-bold">Link al progetto</label>
-                    <input type="url" class="form-control" id="url" placeholder="Inserisci un link al progetto">
+                    <input type="url" class="form-control" id="url" placeholder="Inserisci un link al progetto" value="{{ old('link') }}">
                 </div>
             </div>
 
@@ -41,7 +41,7 @@
             <div class="col-7">
                 <div class="mb-3">
                     <label for="image" class="form-label fw-bold">Immagine</label>
-                    <input type="url" class="form-control @error('image') is-invalid @enderror" id="image" name="image" placeholder="Url immagine" >
+                    <input type="url" class="form-control @error('image') is-invalid @enderror" id="image" name="image" placeholder="Url immagine" value="{{ old('image') }}">
                 </div>
             </div>
             {{-- preview --}}
@@ -55,4 +55,9 @@
             <button class="btn btn-success">Salva</button>
         </div>
     </form>
+@endsection
+
+@section('scripts')
+
+@vite('resources/js/image-preview.js')
 @endsection
