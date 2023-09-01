@@ -3,7 +3,9 @@
 @section('title', $project->title)
 
 @section('content')
-    
+{{-- back --}}
+<a href="{{route('admin.projects.index')}}" class="btn btn-primary mt-4"><i class="fas fa-arrow-left"></i> Torna alla lista dei progetti</a>
+
 <div class="card mt-4">
     <div class="row g-0">
       <div class="col-md-4">
@@ -19,17 +21,15 @@
     </div>
     {{-- buttons --}}
     <div class="d-flex justify-content-end m-2">
-        {{-- back --}}
-        <a href="{{route('admin.projects.index')}}" class="btn btn-primary mt-4">Project List</a>
 
         {{-- edit --}}
-        <a href="{{route('admin.projects.edit', $project )}}" class="btn btn-warning mx-3 mt-4 text-end">Edit Project</a>
+        <a href="{{route('admin.projects.edit', $project )}}" class="btn btn-warning mx-3 mt-4 text-end"><i class="fas fa-pencil"></i> Edit Project</a>
 
         {{-- delete --}}
         <form method="POST" action="{{route('admin.projects.destroy', $project)}}" class="delete-form mt-4">
             @csrf
             @method('DELETE')
-            <button class="btn btn-danger">Delete Project</button>
+            <button class="btn btn-danger"><i class="fas fa-trash"></i> Delete Project</button>
         </form>
     </div>
   </div>
