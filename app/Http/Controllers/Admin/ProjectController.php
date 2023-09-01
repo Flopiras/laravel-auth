@@ -33,12 +33,19 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => ['required', 'string', Rule::unique('project')],
-            'content' => 'nullable|string',
-            'image' => 'nullable|string',
-            'url' => 'nullable|string',
-        ]);
+        $request->validate(
+            [
+                'title' => ['required', 'string', 'max:50', Rule::unique('project')],
+                'content' => 'nullable|string',
+                'image' => 'nullable|string',
+                'url' => 'nullable|url',
+            ],
+            [
+                'title.required' => 'Il titolo è obbligatorio',
+                'title.max:50' => 'Il titolo non può essere più lungo di 50 caratteri',
+                'url.url' => "L'Url deve essere un link valido"
+            ]
+        );
 
         $data = $request->all();
         $project = new project();
