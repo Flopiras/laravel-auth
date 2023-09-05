@@ -1,12 +1,12 @@
 @if($project->exists)
 {{-- edit --}}
-<form method="POST" action="{{ route('admin.projects.update', $project) }}" class="mt-4" enctype="multypart/form-data">
+<form method="POST" action="{{ route('admin.projects.update', $project) }}" class="mt-4" enctype="multipart/form-data">
     {{-- metod --}}
     @method('PUT')
 
 @else
 {{-- create --}}
-<form method="POST" action="{{ route('admin.projects.store') }}" class="mt-4" enctype="multypart/form-data">
+<form method="POST" action="{{ route('admin.projects.store') }}" class="mt-4" enctype="multipart/form-data">
 @endif
 
     {{-- token --}}
@@ -63,8 +63,8 @@
         {{-- image --}}
         <div class="col-7">
             <div class="mb-3">
-                <label for="formFile" class="form-label">Immagine</label>
-                <input class="form-control @error('image') is-invalid @enderror" type="file" id="formFile" value="{{ old('image', $project->image) }}">
+                <label for="image" class="form-label">Immagine</label>
+                <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image">
                 {{-- error message --}}
                 @error('image')
                 <div id="imageFeedback" class="invalid-feedback">
