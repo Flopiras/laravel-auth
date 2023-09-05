@@ -92,7 +92,7 @@ class ProjectController extends Controller
     {
         $request->validate(
             [
-                'title' => 'required|string|max:50|unique:projects',
+                'title' => ['required', 'string', 'max:50', Rule::unique('projects')->ignore($project->id)],
                 'content' => 'nullable|string',
                 'image' => 'nullable|image',
                 'url' => 'nullable|url',
