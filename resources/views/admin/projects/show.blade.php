@@ -9,7 +9,9 @@
 <div class="card mt-4">
     <div class="row g-0">
       <div class="col-md-4">
-        <img src="{{ $project->getImagePath()}}" class="img-fluid rounded m-1" alt="{{ $project->title }}">
+        @if($project->image)
+          <img src="{{ $project->getImagePath()}}" class="img-fluid rounded m-1" alt="{{ $project->title }}">
+        @endif
       </div>
       <div class="col-md-8">
         <div class="card-body">
