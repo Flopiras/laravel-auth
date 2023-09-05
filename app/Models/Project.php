@@ -17,4 +17,9 @@ class Project extends Model
     {
         return substr(($this->content), 0, 100) . '...';
     }
+
+    public function getImagePath()
+    {
+        return asset('storage/' . $this->image);
+    }
 }
