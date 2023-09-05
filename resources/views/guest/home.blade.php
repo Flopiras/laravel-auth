@@ -3,7 +3,7 @@
 
 <header>
     <div class=" my-4 container text-center">
-        <h1>Progetti :</h1>
+        <h1>Projects :</h1>
     </div>
 </header>
 <div class="jumbotron p-5 mb-4 bg-light rounded-3"> 
