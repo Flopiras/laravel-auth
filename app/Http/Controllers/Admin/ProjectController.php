@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 
@@ -38,7 +39,7 @@ class ProjectController extends Controller
             [
                 'title' => 'required|string|max:50|unique:projects',
                 'content' => 'nullable|string',
-                'image' => 'nullable|url',
+                'image' => 'nullable|image',
                 'url' => 'nullable|url',
             ],
             [
@@ -46,12 +47,19 @@ class ProjectController extends Controller
                 'title.unique' => 'Questo titolo esiste già',
                 'title.max:50' => 'Il titolo non può essere più lungo di 50 caratteri',
                 'url.url' => "L'Url deve essere un link valido",
-                'image.url' => "L'Url deve essere un link valido"
+                'image.image' => "Il file non è valido"
             ]
         );
 
         $data = $request->all();
         $project = new project();
+
+        if (array_key_exists('image', $data)) {
+            $img_url = Storage::putFile('projects/images', $data['image']);
+
+            $data['image'] = $img_url;
+        }
+
         $project->fill($data);
         $project->slug = Str::slug($project->title, '-');
         $project->save();
@@ -86,7 +94,7 @@ class ProjectController extends Controller
             [
                 'title' => 'required|string|max:50|unique:projects',
                 'content' => 'nullable|string',
-                'image' => 'nullable|url',
+                'image' => 'nullable|image',
                 'url' => 'nullable|url',
             ],
             [
@@ -94,12 +102,19 @@ class ProjectController extends Controller
                 'title.unique' => 'Questo titolo esiste già',
                 'title.max:50' => 'Il titolo non può essere più lungo di 50 caratteri',
                 'url.url' => "L'Url deve essere un link valido",
-                'image.url' => "L'Url deve essere un link valido"
+                'image.image' => "Il file non è valido"
             ]
         );
 
         $data = $request->all();
         $data['slug'] = Str::slug($data['title'], '-');
+
+        if (array_key_exists('image', $data)) {
+            $img_url = Storage::putFile('projects/images', $data['image']);
+
+            $data['image'] = $img_url;
+        }
+
         $project->update($data);
 
         return to_route('admin.projects.show', $project)
