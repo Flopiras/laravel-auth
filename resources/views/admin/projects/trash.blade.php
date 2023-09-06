@@ -24,17 +24,17 @@
         <tr>
             <th scope="row">{{ $project->id }}</th>
           <td>{{ $project->title }}</td>
-          <td>{{ $project-deleted_at> }}</td>
+          <td>{{ $project->deleted_at }}</td>
           <td>
             <div class="d-flex justify-content-end">
                 {{-- restore --}}
                 <form method="POST" action="{{ route('admin.projects.restore', $project)}}">
                     @csrf
                     @method('PATCH')
-                    <button class="btn btn-primary">Ripristina</button>
+                    <button class="btn btn-warning me-4">Ripristina</button>
                 </form>
                 {{-- delete --}}
-                <form method="POST" action="{{ route('admin.projects.drop') }}">
+                <form method="POST" action="{{ route('admin.projects.drop', $project) }}">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-danger">Elimina definitivamente</button>
