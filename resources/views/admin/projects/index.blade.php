@@ -5,7 +5,10 @@
 @section('content')
 {{-- add new --}}
 <div class="mt-4 d-flex justify-content-end">
-    <a href="{{ route('admin.projects.create')}}" class="btn btn-success">Crea nuovo progetto</a>
+  {{-- create --}}
+    <a href="{{ route('admin.projects.create')}}" class="btn btn-success me-4">Crea nuovo progetto</a>
+    {{-- trash --}}
+    <a href="{{ route('admin.projects.trash')}}" class="btn btn-danger">Cestino</a>
 </div>
     
 {{-- projects --}}
